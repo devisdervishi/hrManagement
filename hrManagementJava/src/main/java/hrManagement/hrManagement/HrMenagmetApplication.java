@@ -40,7 +40,7 @@ public class HrMenagmetApplication implements CommandLineRunner {
 				.username("manager")
 				.firstName("Manager")
 				.lastName("Manage")
-				.DaysOff(20)
+				.DaysOff(0)
 				.build();
 		Example<User> example = Example.of(manager, modelMatcher);
 		if (!userRepo.exists(example)){

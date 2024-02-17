@@ -25,13 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<SaveUserRequestDto> saveUser(@RequestBody SaveUserRequestDto dto){
+    public ResponseEntity<SaveUserRequestDto> saveUser(@RequestBody SaveUserRequestDto dto) throws Exception {
         return userService.saveUser(dto);
     }
     @PatchMapping("/update/{id}")
     public ResponseEntity<UpdateUserRequestDto> updateUser
             (@PathVariable("id") Integer id,
-             @RequestBody UpdateUserRequestDto dto) throws EntityNotFoundException {
+             @RequestBody UpdateUserRequestDto dto) throws Exception {
         return userService.updateUser(id,dto);
     }
     @DeleteMapping("delete/{id}")

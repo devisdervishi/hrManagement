@@ -22,18 +22,18 @@ public class TimeSheetController {
 
     @PostMapping("/save")
     public ResponseEntity<SaveTimeSheetUserRequestDto> saveTimeSheet(
-            @RequestBody SaveTimeSheetUserRequestDto dto){
+            @RequestBody SaveTimeSheetUserRequestDto dto) throws Exception {
         return timeSheetService.saveTimeSheet(dto);
     }
     @PatchMapping("/updateByUser/{id}")
     public ResponseEntity<UpdateTimeSheetUserRequestDto> updateTimeSheetUser(
-            @PathVariable("id") Integer tshId,@RequestBody UpdateTimeSheetUserRequestDto dto) throws EntityNotFoundException {
+            @PathVariable("id") Integer tshId,@RequestBody UpdateTimeSheetUserRequestDto dto) throws Exception {
         return timeSheetService.updateTimeSheetUser(tshId,dto);
     }
 
     @PatchMapping("/updateByManager/{id}")
     public ResponseEntity<UpdateTimeSheetManagerRequestDto> updateTimeSheetManager(
-            @PathVariable("id") Integer tshId,@RequestBody UpdateTimeSheetManagerRequestDto dto) throws EntityNotFoundException {
+            @PathVariable("id") Integer tshId,@RequestBody UpdateTimeSheetManagerRequestDto dto) throws Exception {
         return timeSheetService.updateTimeSheetManager(tshId, dto);
     }
     @DeleteMapping("/delete/{id}")
