@@ -34,6 +34,14 @@ public class TimeSheetService {
                 .createdAt(new Date(System.currentTimeMillis()))
                 .createdBy(dto.getUser().getUsername())
                 .build();
+        List<TimeSheet> thisUserTimesheets=getAllTimeSheetsByUserId(dto.getUser().getId()).getBody();
+        for (TimeSheet ts:thisUserTimesheets
+             ) {
+            if (overlap(ts.getFromDate(),ts.getToDate(),dto.getSaveTimeSheetDto().getFromDate(),
+                    dto.getSaveTimeSheetDto().getToDate())){
+                throw new CommonException("Time sheet period should not overlap with previous time sheets");
+            }
+        }
         Long dayDifferenceMilliseconds=newTimeSheet.getToDate().getTime()-newTimeSheet.getFromDate().getTime();
         if(newTimeSheet.getFromDate().getYear()!=new Date().getYear()||newTimeSheet.getToDate().getYear()!=new Date().getYear()){
             throw new CommonException("From date and To date must be in the current year");
@@ -51,6 +59,14 @@ public class TimeSheetService {
         Optional<TimeSheet> tshToBeUpdated = timeSheetRepository.findById(id);
         if (tshToBeUpdated.isEmpty()) {
             throw new EntityNotFoundException("Time Sheet with id:" + id + " doesnt exist");
+        }
+        List<TimeSheet> thisUserTimesheets=getAllTimeSheetsByUserId(tshToBeUpdated.get().getUser().getId()).getBody();
+        for (TimeSheet ts:thisUserTimesheets
+        ) {
+            if (overlap(ts.getFromDate(),ts.getToDate(),tshToBeUpdated.get().getFromDate(),
+                    tshToBeUpdated.get().getToDate())){
+                throw new CommonException("Time sheet period should not overlap with previous time sheets");
+            }
         }
         Long dayDifferenceMilliseconds=dto.getToDate().getTime()-dto.getFromDate().getTime();
         if (dayDifferenceMilliseconds<0){throw new CommonException("To date must be after the from Date");}
@@ -98,6 +114,9 @@ public class TimeSheetService {
     public ResponseEntity<List<TimeSheet>> getAllTimeSheetsByUserId(Integer userId){
         List<TimeSheet> timeSheets=timeSheetRepository.findTimeSheetsByUserId(userId);
             return ResponseEntity.ok().body(timeSheets);
+    }
+    private boolean overlap(Date start1, Date end1, Date start2, Date end2){
+        return start1.getTime() <= end2.getTime() && start2.getTime() <= end1.getTime();
     }
 }
 
