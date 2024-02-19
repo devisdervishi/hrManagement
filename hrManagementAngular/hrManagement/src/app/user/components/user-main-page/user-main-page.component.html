@@ -1,0 +1,13 @@
+<div>
+    <h2>First Name:{{firstName}}</h2>
+    <h2>Last Name:{{lastName}}</h2>
+</div>
+
+<div *ngFor="let timeSheet of timeSheets |async">
+    <user-timesheet (timeSheetWasDeleted)="loadTimeSheets()" [timeSheetToDisplay]="timeSheet"></user-timesheet>
+</div>
+
+<br>
+<user-new-time-sheet-form></user-new-time-sheet-form>
+<br>
+<button (click)="logout()">Logout</button>

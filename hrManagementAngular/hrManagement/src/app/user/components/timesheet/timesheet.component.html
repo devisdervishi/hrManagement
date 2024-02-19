@@ -1,0 +1,7 @@
+<div style="border: 2px solid black;">
+    <h4>From Date:{{timeSheet.fromDate | date:'yyyy:MM:dd'}}</h4>
+    <h4>To Date:{{timeSheet.toDate | date:'yyyy:MM:dd'}}</h4>
+    <h4>Note:{{timeSheet.note}}</h4>
+    <h4>Status:{{timeSheet.status}}</h4>
+    <button *ngIf="timeSheet.status=='PENDING'" (click)="deleteTimeSheet()">Delete</button>
+</div>

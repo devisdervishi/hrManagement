@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="makeTimeSheetRequest()">
+<mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [min]="minDate" [max]="maxDate" [formGroup]="form" [rangePicker]="picker">
+      <input  readonly matStartDate  formControlName="fromDate" placeholder="Start date">
+      <input readonly matEndDate  formControlName="toDate" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  
+    
+    <ng-container *ngIf="form.controls.fromDate.hasError('required')&&form.controls.fromDate.dirty">
+        <mat-error>Start date is required</mat-error>
+      </ng-container>
+      <ng-container *ngIf="form.controls.toDate.hasError('required')&&form.controls.fromDate.dirty">
+        <mat-error>End date is required</mat-error>
+      </ng-container>
+    
+      
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput  formControlName="note" placeholder="Write a note">
+  </mat-form-field>
+  <button type="submit">Request</button>
+</form>
+ 
+  

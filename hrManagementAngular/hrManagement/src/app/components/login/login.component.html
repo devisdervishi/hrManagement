@@ -1,0 +1,24 @@
+<body>
+    <br><br><form [formGroup]="form" (ngSubmit)="login()">
+       
+        Username:
+        <input type="text"  name="username" formControlName="username">
+        <ng-container *ngIf="form.controls['username'].errors">
+          <div class="error" *ngIf="form.controls['username'].hasError('required')&&form.controls['password'].dirty">Username is required</div>
+          <div class="error" *ngIf="form.controls['username'].hasError('unique')&&form.controls['password'].dirty">Username must be unique</div>
+          </ng-container>
+        <br>
+        Password:
+        <input type="password"  name="password" formControlName="password">
+        <ng-container *ngIf="form.controls['password'].errors">
+          <div class="error" *ngIf="form.controls['password'].hasError('required')&&form.controls['password'].dirty">Password is required</div>
+          </ng-container>
+        <br>
+        <div class="error" *ngIf="userNotPresent">No user exists with this credentials</div>
+        <button [disabled]="!form.valid" type="submit">Confirm</button>
+        <button [routerLink]="'/signUp'">Sign Up</button>
+      </form>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </body>
+
+

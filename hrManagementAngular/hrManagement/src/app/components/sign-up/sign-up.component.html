@@ -1,0 +1,40 @@
+<body>
+    <br><br><form [formGroup]="form" (ngSubmit)="signUp()">
+        Name:
+        <input type="text"  name="firstName" formControlName="firstName">
+        <ng-container *ngIf="form.controls['firstName'].errors">
+          <div class="error" *ngIf="form.controls['firstName'].hasError('required')&&form.controls['firstName'].dirty">Name is required</div>
+          <div class="error" *ngIf="form.controls['firstName'].hasError('maxlength')&&form.controls['firstName'].dirty">
+          Name must be less than 45 chars long</div>
+          </ng-container>
+        <br>
+        Last Name:
+        <input type="text" name="lastName" formControlName="lastName">
+        <div class="error" *ngIf="form.controls['lastName'].hasError('required')&&form.controls['lastName'].dirty">Last Name is required</div>
+        <div class="error" *ngIf="form.controls['lastName'].hasError('maxlength')&&form.controls['lastName'].dirty">
+          Last name must be less than 45 chars long</div>
+        <br> 
+        Username:
+        <input type="text"  name="username" formControlName="username">
+        <ng-container *ngIf="form.controls['username'].errors">
+          <div class="error" *ngIf="form.controls['username'].hasError('required')&&form.controls['username'].dirty">Username is required</div>
+          <div class="error" *ngIf="form.controls['username'].hasError('unique')&&form.controls['username'].dirty">Username must be unique</div>
+          <div class="error" *ngIf="form.controls['username'].hasError('maxlength')&&form.controls['username'].dirty">
+            Username must be less than 45 chars long</div>
+        </ng-container>
+        <br>
+        Password:
+        <input type="password"  name="password" formControlName="password">
+        <ng-container *ngIf="form.controls['password'].errors">
+          <div class="error" *ngIf="form.controls['password'].hasError('required')&&form.controls['password'].dirty">Password is required</div>
+          <div class="error" *ngIf="form.controls['password'].hasError('maxlength')&&form.controls['password'].dirty">
+            Password must be less than 45 chars long</div>
+          </ng-container>
+        <br>
+        <button [disabled]="!form.valid" type="submit">Confirm</button>
+        <button type="button" [routerLink]="'/login'">Back to login</button>
+      </form>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </body>
+
+
