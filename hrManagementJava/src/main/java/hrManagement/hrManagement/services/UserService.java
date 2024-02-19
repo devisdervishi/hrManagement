@@ -38,20 +38,25 @@ public class UserService {
                 .password(passwordEncoder().encode(dto.getPassword()))
                 .role(UserType.USER)
                 .createdAt(new Date(System.currentTimeMillis()))
+                .createdBy(dto.getUsername())
                 .DaysOff(20).build();
         userRepository.save(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
-    public ResponseEntity<UpdateUserRequestDto> updateUser(Integer id,UpdateUserRequestDto dto) throws Exception {
-        Optional<User> userToBeUpdated=userRepository.findById(id);
-        if (userToBeUpdated.isEmpty()){throw new EntityNotFoundException("User with id:"+id+"doesnt exist");}
+    public ResponseEntity<UpdateUserRequestDto> updateUser(Integer userId,Integer managerId,UpdateUserRequestDto dto) throws Exception {
+        Optional<User> userToBeUpdated=userRepository.findById(userId);
+        Optional<User> manager=userRepository.findById(managerId);
+        if (userToBeUpdated.isEmpty()){throw new EntityNotFoundException("User with id:"+userId+" doesnt exist");}
+        else if (manager.isEmpty()){throw new EntityNotFoundException("Manager with id:"+managerId+" doesnt exist");}
         else{
-            if(checkForUsernameUniqueness(dto.getUsername(), "").getBody()){
+            if(checkForUsernameUniqueness(dto.getUsername(), userToBeUpdated.get().getUsername()).getBody()){
                 throw new CommonException("Username must be unique");
             };
             userToBeUpdated.get().setFirstName(dto.getFirstName());
             userToBeUpdated.get().setLastName(dto.getLastName());
             userToBeUpdated.get().setUsername(dto.getUsername());
+            userToBeUpdated.get().setModifiedBy(manager.get().getUsername());
+            userToBeUpdated.get().setModifiedAt(new Date(System.currentTimeMillis()));
             userRepository.save(userToBeUpdated.get());
             return ResponseEntity.status(HttpStatus.OK).body(dto);
         }
@@ -82,5 +87,9 @@ public class UserService {
         Optional<User> user=userRepository.checkForUserWithUsername(currentUsername,newUsername);
         if (user.isEmpty()){return ResponseEntity.ok(false);}
         else return ResponseEntity.ok(true);
+    }
+
+    public Optional<User> getUserById(Integer id){
+        return userRepository.findById(id);
     }
 }

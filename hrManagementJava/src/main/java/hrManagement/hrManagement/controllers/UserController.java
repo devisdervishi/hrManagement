@@ -28,11 +28,12 @@ public class UserController {
     public ResponseEntity<SaveUserRequestDto> saveUser(@RequestBody SaveUserRequestDto dto) throws Exception {
         return userService.saveUser(dto);
     }
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/update/{userId}/{managerId}")
     public ResponseEntity<UpdateUserRequestDto> updateUser
-            (@PathVariable("id") Integer id,
+            (@PathVariable("userId") Integer userId,
+             @PathVariable("managerId") Integer managerId,
              @RequestBody UpdateUserRequestDto dto) throws Exception {
-        return userService.updateUser(id,dto);
+        return userService.updateUser(userId,managerId,dto);
     }
     @DeleteMapping("delete/{id}")
     public ResponseEntity deleteUser(@PathVariable("id") Integer id) throws EntityNotFoundException {

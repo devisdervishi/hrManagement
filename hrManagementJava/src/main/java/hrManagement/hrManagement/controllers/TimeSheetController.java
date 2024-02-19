@@ -1,8 +1,8 @@
 package hrManagement.hrManagement.controllers;
 
 import hrManagement.hrManagement.Entities.TimeSheet;
-import hrManagement.hrManagement.Entities.User;
-import hrManagement.hrManagement.dto.timeSheetDto.SaveTimeSheetUserRequestDto;
+import hrManagement.hrManagement.dto.DeletedEntityDto;
+import hrManagement.hrManagement.dto.timeSheetDto.SaveTimeSheetDto;
 import hrManagement.hrManagement.dto.timeSheetDto.UpdateTimeSheetManagerRequestDto;
 import hrManagement.hrManagement.dto.timeSheetDto.UpdateTimeSheetUserRequestDto;
 import hrManagement.hrManagement.exceptions.EntityNotFoundException;
@@ -20,10 +20,10 @@ import java.util.List;
 public class TimeSheetController {
     private TimeSheetService timeSheetService;
 
-    @PostMapping("/save")
-    public ResponseEntity<SaveTimeSheetUserRequestDto> saveTimeSheet(
-            @RequestBody SaveTimeSheetUserRequestDto dto) throws Exception {
-        return timeSheetService.saveTimeSheet(dto);
+    @PostMapping("/save/{userId}")
+    public ResponseEntity<SaveTimeSheetDto> saveTimeSheet(
+            @RequestBody SaveTimeSheetDto dto, @PathVariable("userId") Integer userId) throws Exception {
+        return timeSheetService.saveTimeSheet(dto,userId);
     }
     @PatchMapping("/updateByUser/{id}")
     public ResponseEntity<UpdateTimeSheetUserRequestDto> updateTimeSheetUser(
@@ -37,7 +37,7 @@ public class TimeSheetController {
         return timeSheetService.updateTimeSheetManager(tshId, dto);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteTimeSheet(@PathVariable("id") Integer tshId) throws EntityNotFoundException {
+    public ResponseEntity<DeletedEntityDto> deleteTimeSheet(@PathVariable("id") Integer tshId) throws EntityNotFoundException {
         return timeSheetService.deleteTimeSheet(tshId);
     }
     @GetMapping("/user/{id}")
