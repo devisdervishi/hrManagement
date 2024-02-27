@@ -1,24 +1,34 @@
-<body>
-    <br><br><form [formGroup]="form" (ngSubmit)="login()">
-       
-        Username:
-        <input type="text"  name="username" formControlName="username">
-        <ng-container *ngIf="form.controls['username'].errors">
-          <div class="error" *ngIf="form.controls['username'].hasError('required')&&form.controls['password'].dirty">Username is required</div>
-          <div class="error" *ngIf="form.controls['username'].hasError('unique')&&form.controls['password'].dirty">Username must be unique</div>
-          </ng-container>
-        <br>
-        Password:
-        <input type="password"  name="password" formControlName="password">
-        <ng-container *ngIf="form.controls['password'].errors">
-          <div class="error" *ngIf="form.controls['password'].hasError('required')&&form.controls['password'].dirty">Password is required</div>
-          </ng-container>
-        <br>
-        <div class="error" *ngIf="userNotPresent">No user exists with this credentials</div>
-        <button [disabled]="!form.valid" type="submit">Confirm</button>
-        <button [routerLink]="'/signUp'">Sign Up</button>
-      </form>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </body>
-
-
+<body style="text-align: center;background-color: rgb(197, 220, 239);">
+  <br>
+  <img src="./assets/images/hrlogo.jpeg" alt="">
+  <h1 class="title">HR Management Login</h1>
+  <form class="login-form" [formGroup]="form" (ngSubmit)="login()">
+    <br>
+    <mat-form-field>
+      <mat-label>Username:</mat-label>
+      <input matInput type="text" name="username" formControlName="username">
+      <ng-container *ngIf="form.controls['username'].errors">
+        <mat-error *ngIf="form.controls['username'].hasError('required')&&form.controls['password'].dirty">
+          Username is required
+        </mat-error>
+        <mat-error *ngIf="form.controls['username'].hasError('unique')&&form.controls['password'].dirty">
+          Username must be unique
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Password:</mat-label>
+      <input matInput type="password" name="password" formControlName="password">
+      <ng-container *ngIf="form.controls['password'].errors">
+        <mat-error *ngIf="form.controls['password'].hasError('required')&&form.controls['password'].dirty">
+          Password is required
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+    <br>
+    <mat-error *ngIf="userNotPresent">No user exists with this credentials</mat-error>
+    <button class="button" mat-stroked-button color="primary" [disabled]="!form.valid" type="submit">Confirm</button>
+    <button class="button" mat-stroked-button color="primary" [routerLink]="'/signUp'">Sign Up</button>
+  </form>
+</body>

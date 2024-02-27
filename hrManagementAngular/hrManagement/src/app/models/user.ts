@@ -10,5 +10,6 @@ export interface User {
     password: string
     role: string
     daysOff: number
+    latestTimeSheet:any
    }
    

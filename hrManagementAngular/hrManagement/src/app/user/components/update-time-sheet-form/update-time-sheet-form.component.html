@@ -1,0 +1,40 @@
+<form class="edit-ts-form" *ngIf="timeSheetToBeUpdated" [formGroup]="form" (ngSubmit)="updateTimeSheet()">
+  <h1 class="title">Edit request</h1>
+  <mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [min]="minDate" [max]="maxDate" [formGroup]="form" [rangePicker]="picker">
+      <input readonly matStartDate formControlName="fromDate" placeholder="Start date">
+      <input readonly matEndDate formControlName="toDate" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <ng-container *ngIf="form.controls['toDate'].errors | oneError:['overlaps','exceeds'] as errors">
+      <ng-container *ngIf="form.controls['fromDate'].hasError('required')&&form.controls['fromDate'].dirty">
+        <mat-error>Start date is required</mat-error>
+      </ng-container>
+      <ng-container *ngIf="form.controls['toDate'].hasError('required')&&form.controls['fromDate'].dirty">
+        <mat-error>End date is required</mat-error>
+      </ng-container>
+      <ng-container *ngIf="errors?.['overlaps']&&form.controls['fromDate'].dirty">
+        <mat-error>This dates overlap with previous time sheets dates</mat-error>
+      </ng-container>
+      <ng-container *ngIf="errors?.['exceeds']&&form.controls['fromDate'].dirty">
+        <mat-error>You dont have enough days off for this time sheet! Consider
+          updating this time sheet dates or changing other time sheets dates</mat-error>
+      </ng-container>
+    </ng-container>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput formControlName="note" placeholder="Write a note">
+  </mat-form-field>
+  <br>
+  <mat-form-field style="display: none;">
+    <input matInput hidden formControlName="id" type="text">
+  </mat-form-field>
+  <button class="button" mat-stroked-button color="primary" [disabled]="!form.valid" type="submit">Save</button>
+  &nbsp;
+  <button class="button" mat-stroked-button color="primary" (click)="hideUpdateTsForm()">Cancel</button>
+  <br>
+</form>

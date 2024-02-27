@@ -1,0 +1,23 @@
+.timesheet-card {
+    max-width: 700px;
+    background-color: aliceblue;
+    text-align: center;
+    border-radius: 10px;
+ }
+  .card-border{
+    border: 3px solid rgb(151, 149, 149);
+    border-radius: 10px;
+    max-width: 700px;
+  }
+.card-content{
+  font-family: "Lucida Console", "Courier New", fantasy;
+  font-size: 20px;
+}
+  .del-button{
+    margin-left: 280px;
+    background-color: rgb(236, 91, 94);
+  }
+  .edit-button{
+    margin-left: 10px;
+    background-color: rgb(133, 194, 245);
+  }

@@ -1,7 +1,28 @@
-<div style="border: 2px solid black;">
-    <h4>From Date:{{timeSheet.fromDate | date:'yyyy:MM:dd'}}</h4>
-    <h4>To Date:{{timeSheet.toDate | date:'yyyy:MM:dd'}}</h4>
-    <h4>Note:{{timeSheet.note}}</h4>
-    <h4>Status:{{timeSheet.status}}</h4>
-    <button *ngIf="timeSheet.status=='PENDING'" (click)="deleteTimeSheet()">Delete</button>
+<div class="card-border">
+  <mat-card class="timesheet-card"
+    [ngClass]="{'approved':timeSheet.status=='APPROVED','rejected':timeSheet.status=='REJECTED'}">
+    <mat-card-header>
+      <mat-card-title>Vacation</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="card-content">
+        <h4 class="card-content">From Date:{{timeSheet.fromDate | date:'yyyy:MM:dd'}}</h4>
+        <h4 class="card-content">To Date:{{timeSheet.toDate | date:'yyyy:MM:dd'}}</h4>
+        <h4 class="card-content" *ngIf="timeSheet.note!=null">Note:{{timeSheet.note}}</h4>
+        <h4 class="card-content">Status:{{timeSheet.status}}</h4>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions *ngIf="timeSheet.status=='PENDING'">
+      <button class="del-button" mat-fab color="primary" (click)="openDialog('500ms','500ms')">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="edit-button" mat-fab color="primary" (click)="sendTsToUpdate()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-card-footer *ngIf="timeSheet.status=='PENDING'">
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
 </div>

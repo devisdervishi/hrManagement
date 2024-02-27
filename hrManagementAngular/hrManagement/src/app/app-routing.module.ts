@@ -6,11 +6,11 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signUp', component: SignUpComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

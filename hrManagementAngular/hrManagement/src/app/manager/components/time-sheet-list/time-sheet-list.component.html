@@ -1,0 +1,5 @@
+<div class="scrollable">
+    <div *ngFor="let timesheet of timeSheets |async">
+        <manager-timesheet [timeSheet]="timesheet" (tsWasEdited)="getTimeSheets()"></manager-timesheet>
+    </div>
+</div>

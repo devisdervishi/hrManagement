@@ -1,0 +1,7 @@
+<div class="scrollable">
+    <h1 *ngIf="(timeSheets |async |empty)">You have no vacation requests</h1>
+    <div *ngFor="let timeSheet of timeSheets |async">
+        <user-timesheet (timeSheetWasDeleted)="loadTimeSheets()" (updateTsClicked)="getTimeSheetToBeUpdated($event)"
+            [timeSheetToDisplay]="timeSheet"></user-timesheet>
+    </div>
+</div>

@@ -10,11 +10,11 @@ const routes: Routes = [
     component: UserMainPageComponent,
     canActivate: [AuthGuard, UserRoleGuard],
     data: { role: 'USER' },
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

@@ -1,0 +1,27 @@
+.scrollable{
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 720px;
+    height:500px;
+    border: 2px solid rgb(68, 68, 230);
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.search{
+    width: 500px;
+    border-radius: 10px;
+    height: 50px;
+    font-size: larger;
+    border: 2px solid rgb(158, 193, 242);
+}
+.search:focus{
+    outline: 2px solid rgb(45, 90, 224);
+}
+.header{
+    margin-left: 450px;
+}
+.sort{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(197, 220, 239);
+}

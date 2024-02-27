@@ -2,31 +2,36 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { AuthserviceAllCompSharedService } from './componentsSharedServices/authservice-all-comp-shared.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private userService:UserService) {}
-  
+  constructor(
+    private userService: UserService,
+    private authservice_AllComp: AuthserviceAllCompSharedService
+  ) {}
+
   login(user: User) {
-    localStorage.setItem('STATE', 'true');
-    localStorage.setItem('USER_ROLE', user.role);
-    localStorage.setItem('USER_ID',user.id+"");
-    localStorage.setItem('USER_USERNAME',user.username)
-    localStorage.setItem('USER_FIRSTNAME',user.firstName)
-    localStorage.setItem('USER_LASTNAME',user.lastName)
+    this.authservice_AllComp.state = true;
+    this.authservice_AllComp.role = user.role;
+    this.authservice_AllComp.id = user.id;
+    this.authservice_AllComp.username = user.username;
+    this.authservice_AllComp.firstname = user.firstName;
+    this.authservice_AllComp.lastname = user.lastName;
+    this.authservice_AllComp.daysoff = user.daysOff;
   }
   logout() {
-    localStorage.clear()
+    this.authservice_AllComp.clearData();
   }
   isLoggedIn() {
-    return localStorage.getItem('STATE');
+    return this.authservice_AllComp.state;
   }
   getRole() {
-    return localStorage.getItem('USER_ROLE')!;
+    return this.authservice_AllComp.role;
   }
-  getUserByEmailAndPassword(username:string,password:string):Observable<User>{
-    return this.userService.loadUserByCredentials(username,password)  
+  getUserByEmailAndPassword(username: string,password: string): Observable<User> {
+    return this.userService.loadUserByCredentials(username, password);
   }
 }

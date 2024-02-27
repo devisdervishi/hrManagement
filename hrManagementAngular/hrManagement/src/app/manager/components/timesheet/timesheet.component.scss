@@ -1,0 +1,31 @@
+.timesheet-card {
+    max-width: 700px;
+    background-color: aliceblue;
+    text-align: center;
+    border-radius: 10px;
+ }
+  .card-border{
+    border: 3px solid rgb(151, 149, 149);
+    border-radius: 10px;
+    max-width: 700px;
+  }
+.card-content{
+  font-family: "Lucida Console", "Courier New", fantasy;
+  font-size: 20px;
+}
+  .approve-button{
+    margin-left: 245px;
+    background-color: rgb(129, 239, 119);
+  }
+  .reject-button{
+    margin-left: 10px;
+    background-color: rgb(247, 132, 153);
+  }
+  .approved{
+    border: 3px solid rgb(60, 133, 49);
+    background-color: rgb(207, 255, 223);
+  }
+  .rejected{
+    border: 3px solid rgb(176, 26, 26);
+    background-color: rgb(247, 178, 178);
+  }

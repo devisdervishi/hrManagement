@@ -1,13 +1,12 @@
-<div>
-    <h2>First Name:{{firstName}}</h2>
-    <h2>Last Name:{{lastName}}</h2>
+<div class="body">
+    <br>
+    <user-userinfo></user-userinfo>
+    <br>
+    <h1 style="margin-left: 20px;font-family: 'Lucida Console', 'Courier New', fantasy;">My vacations:</h1>
+    <user-timesheet-list></user-timesheet-list>
+    <br>
+    <user-new-time-sheet-form></user-new-time-sheet-form>
+    <br>
+    <user-update-time-sheet-form></user-update-time-sheet-form>
+    <button class="logout" mat-stroked-button color="primary" (click)="logout()">Logout</button>
 </div>
-
-<div *ngFor="let timeSheet of timeSheets |async">
-    <user-timesheet (timeSheetWasDeleted)="loadTimeSheets()" [timeSheetToDisplay]="timeSheet"></user-timesheet>
-</div>
-
-<br>
-<user-new-time-sheet-form></user-new-time-sheet-form>
-<br>
-<button (click)="logout()">Logout</button>

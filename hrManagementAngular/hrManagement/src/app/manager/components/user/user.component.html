@@ -1,0 +1,29 @@
+<div class="card-border" *ngIf="user.id!=managerId">
+    <mat-card class="timesheet-card">
+        <mat-card-title>User</mat-card-title>
+        <mat-card-content>
+            <div class="card-content">
+                <h2 class="card-content">First Name:{{user.firstName}}</h2>
+                <h2 class="card-content">Last Name:{{user.lastName}}</h2>
+                <h2 class="card-content">Username:{{user.username}}</h2>
+                <h2 class="card-content">Remaining days off:{{user.daysOff}}</h2>
+                <h2 class="card-content" *ngIf="isPendingData">Status:PENDING</h2>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="del-button" *ngIf="user.id!=managerId" mat-fab color="primary"
+                (click)="openDialog('500ms','500ms')">
+                Delete
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button class="edit-button" mat-fab color="primary"
+                [routerLink]="['/manager/editUser',myEncryptor(user.id+'')]">
+                Edit
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="isPendingData">
+            <mat-progress-bar mode="buffer"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>

@@ -1,0 +1,12 @@
+<br>
+<div class="header">
+    <input class="search" type="text" [(ngModel)]="search" placeholder=" Search">
+    &nbsp;
+    <button class="sort" mat-stroked-button color="primary" (click)="changeSorting()">↓↑</button>
+</div>
+<br>
+<div class="scrollable">
+    <div *ngFor="let user of users | async | userFilter:search | userSort:sortOrder">
+        <manager-user (userDeleted)="getAllUsers()" [user]="user"></manager-user>
+    </div>
+</div>

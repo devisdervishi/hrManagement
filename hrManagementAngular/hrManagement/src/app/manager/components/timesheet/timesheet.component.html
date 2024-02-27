@@ -1,0 +1,24 @@
+<div class="card-border">
+    <mat-card class="timesheet-card"
+        [ngClass]="{'approved':timeSheet.status=='APPROVED','rejected':timeSheet.status=='REJECTED'}">
+        <mat-card-content>
+            <div>
+                <h2 class="card-content">From Date:{{timeSheet.fromDate | date:'yyyy:MM:dd'}}</h2>
+                <h2 class="card-content">To Date:{{timeSheet.toDate | date:'yyyy:MM:dd'}}</h2>
+                <h2 class="card-content">Note:{{timeSheet.note}}</h2>
+                <h2 class="card-content">Status:{{timeSheet.status}}</h2>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="approve-button" mat-stroked-button color="primary" *ngIf="timeSheet.status=='PENDING'"
+                (click)="editTimeSheetStatus('APPROVED')">
+                APPROVE</button>
+            <button class="reject-button" mat-stroked-button color="primary" *ngIf="timeSheet.status=='PENDING'"
+                (click)="editTimeSheetStatus('REJECTED')">
+                REJECT</button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="timeSheet.status=='PENDING'">
+            <mat-progress-bar mode="buffer"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>

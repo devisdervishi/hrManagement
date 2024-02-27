@@ -1,0 +1,16 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Delete user?</h2>
+  <mat-dialog-content>
+    <h3>Name:{{user.firstName}}
+      <br>
+      Last name:{{user.lastName}}
+      <br>
+      Username:{{user.username}}
+    </h3>
+  </mat-dialog-content>
+  <br>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" (click)="deleteUser()">Delete</button>
+  </mat-dialog-actions>
+</div>

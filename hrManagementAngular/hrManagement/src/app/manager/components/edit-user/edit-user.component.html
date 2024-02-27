@@ -1,0 +1,49 @@
+<div class="body">
+  <br>
+  <form [formGroup]="form" class="edit-form">
+    <br>
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput type="text" name="firstName" formControlName="firstName">
+      <ng-container *ngIf="form.controls['firstName'].errors">
+        <mat-error *ngIf="form.controls['firstName'].hasError('required')&&form.controls['firstName'].dirty">Name is
+          required</mat-error>
+        <mat-error *ngIf="form.controls['firstName'].hasError('maxlength')&&form.controls['firstName'].dirty">
+          Name must be less than 45 chars long</mat-error>
+      </ng-container>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Last Name:</mat-label>
+      <input matInput type="text" name="lastName" formControlName="lastName">
+      <ng-container>
+        <mat-error *ngIf="form.controls['lastName'].hasError('required')&&form.controls['lastName'].dirty">Last Name is
+          required</mat-error>
+        <mat-error class="error"
+          *ngIf="form.controls['lastName'].hasError('maxlength')&&form.controls['lastName'].dirty">
+          Last name must be less than 45 chars long</mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+      <mat-label>Username:</mat-label>
+      <input matInput type="text" name="username" formControlName="username">
+      <ng-container *ngIf="form.controls['username'].errors">
+        <mat-error *ngIf="form.controls['username'].hasError('required')&&form.controls['username'].dirty">Username is
+          required</mat-error>
+        <mat-error *ngIf="form.controls['username'].hasError('unique')&&form.controls['username'].dirty">Username must
+          be unique</mat-error>
+        <mat-error *ngIf="form.controls['username'].hasError('maxlength')&&form.controls['username'].dirty">
+          Username must be less than 45 chars long</mat-error>
+      </ng-container>
+    </mat-form-field>
+    <br>
+    <button class="save-button" mat-stroked-button color="primary" type="submit"
+      (click)="editUser()">Save</button>&nbsp;
+    <button class="cancel-button" mat-stroked-button color="primary" [routerLink]="['/manager/main']">Cancel</button>
+  </form>
+  <br>
+  <h2 class="list-title">User vacation requests:</h2>
+  <manager-time-sheet-list></manager-time-sheet-list>
+</div>

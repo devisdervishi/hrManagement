@@ -1,0 +1,11 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Delete vacation?</h2>
+  <mat-dialog-content>
+    <h3>From:{{timeSheet.fromDate|date}}-To:{{timeSheet.toDate|date}}</h3>
+  </mat-dialog-content>
+  <br>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" (click)="deleteTimeSheet()">Delete</button>
+  </mat-dialog-actions>
+</div>
