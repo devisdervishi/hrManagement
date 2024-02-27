@@ -11,14 +11,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-    @ControllerAdvice
-    public class EntityNotFoundExceptionController extends ResponseEntityExceptionHandler {
-        @ExceptionHandler(EntityNotFoundException.class)
-        public ResponseEntity<Error> entityNotFound(EntityNotFoundException exception, WebRequest request){
+@ControllerAdvice
+public class EntityNotFoundExceptionController extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Error> entityNotFound(EntityNotFoundException exception, WebRequest request) {
 
-            Error errorMessage=new Error(exception.getMessage(), HttpStatus.NOT_FOUND,
-                    ((ServletWebRequest)request).getRequest().getRequestURL().toString());
-            return ResponseEntity.status(errorMessage.getStatus()).body(errorMessage);
-        }
+        Error errorMessage = new Error(exception.getMessage(), HttpStatus.NOT_FOUND,
+                ((ServletWebRequest) request).getRequest().getRequestURL().toString());
+        return ResponseEntity.status(errorMessage.getStatus()).body(errorMessage);
     }
+}
 

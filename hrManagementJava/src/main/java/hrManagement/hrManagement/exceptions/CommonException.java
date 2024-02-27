@@ -1,6 +1,6 @@
 package hrManagement.hrManagement.exceptions;
 
-public class CommonException extends Exception{
+public class CommonException extends Exception {
     public CommonException() {
         super();
     }

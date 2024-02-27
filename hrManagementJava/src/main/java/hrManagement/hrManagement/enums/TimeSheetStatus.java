@@ -1,5 +1,7 @@
 package hrManagement.hrManagement.enums;
 
 public enum TimeSheetStatus {
-    PENDING,APPROVED,REJECTED
+    PENDING,
+    APPROVED,
+    REJECTED
 }
